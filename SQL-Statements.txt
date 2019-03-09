@@ -41,7 +41,7 @@ A:
 	
 	VARCHAR - employee names
 
-	String - Product Descriptions
+	text - Product Descriptions
 
 	Date - the day a transaction was posted for financial accounting in the format of 	YYYY-MM-DD
 
@@ -202,11 +202,11 @@ Edit another satellite because it is no longer operating and change the value to
 
 		Id integer,
 
-		subject_line string,
+		subject_line text,
 
 		sender text,
 
-		recipients string
+		recipients text
 
 		time_sent timestamp,
 
