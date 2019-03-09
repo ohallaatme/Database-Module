@@ -1,0 +1,247 @@
+1.
+
+
+Q: List the commands for adding, updating and deleting data.
+
+A:
+
+Adding: CREATE, INSERT INTO
+
+Updating: UPDATE, ALTER TABLE
+
+Deleting: DELETE, DROP TABLE
+
+
+2.
+
+Q: Explain the structure for each type of command:
+
+
+A:
+
+CREATE - The structure here is to list the table name, then provide a name and a data type.
+
+INSERT INTO - list the name of the table, the columns, and what you would like to put in it. You can also insert a single row by listing the inputs you would like in order.
+
+UPDATE - We state the table to update and what we want to SET and conditionally for what items using commands such as WHERE, and AND considering more than one operator can be taken.
+
+DELETE - we remove data by stating the table we want to delete FROM based on conditional operators such as WHERE. 
+
+ALTER TABLE - we can ALTER schemas of our table by stating which table and adding columns.
+
+DROP TABLE - We state the whole table we want to delete, cannot be undone.
+
+3. 
+
+Q: What are some of the data types that can be used in tables? Give a real world example of each type.
+
+A:
+
+	Int32 - An employee ID number
+	
+	VARCHAR - employee names
+
+	String - Product Descriptions
+
+	Date - the day a transaction was posted for financial accounting in the format of 	YYYY-MM-DD
+
+
+4. 
+
+Q: Decide how to create a new table to hold a list of people to invite to a wedding dinner. The table needs to have first and last names, whether they sent their RSVP, the number of guests they are bringing, and the # of meals (1 for adults, 1/2 for children).
+
+A:
+
+1.
+
+
+I would use the following data types:
+
+	First and last name - text
+	
+	Whether they sent in their RSVP: BIT
+
+	Number of guests: integer
+
+	Number of meals: decimal
+
+
+Write a command that creates the table to track the wedding dinner:
+
+
+	CREATE TABLE expensiveweddingdinner (
+
+		name text,
+
+		RSVP BIT,
+		
+		number_of_guests: integer
+
+		number_of_meals: decimal
+
+	);
+
+		
+
+		
+Write a command that adds a column to track whether the guest sent a thank you card:
+
+	ALTER TABLE expensiveweddingdinner ADD COLUMN did_you_send_thank_you BIT;
+
+
+You have decided to move the data about the meals to another table, so write a command to remove the column storing the number of meals from the wedding table:
+
+
+	ALTER TABLE expensiveweddingdinner DROP COLUMN number_of_meals;
+
+
+The guests will need a place to sit at the reception, so write a command that adds a column for table number:
+
+	ALTER TABLE expensiveweddingdinner ADD COLUMN table_number integer;
+
+The wedding is over and we do not need to keep this information, so write a command that deletes the table numbers from the data base
+
+	ALTER TABLE expensiveweddingdinner DROP COLUMN table_number;
+
+
+5. 
+
+Q: 
+
+Write a command to create a new table to hold the books in a library with the columns ISBN, title, author, genre, publishing date, number of copies, and available copies:
+
+
+A:
+
+	CREATE TABLE librarybooks (
+
+		ISBN integer, 
+		
+		title text, 
+
+		author text,
+
+		genre text,
+
+		publishing_date, date,
+
+		number_copies integer,
+
+		available_copies integer
+
+	);
+
+
+Find three books and add their information to the table:
+
+	INSERT INTO librarybooks (ISBN, title, author, genre, publishing_date, number_copies, available_copies) VALUES
+	(123, 'mybook', 'Katie', 'Non-Fiction', 1993-04-11, 20, 1),
+	(143, 'yearbook', 'Holy Angels', 'Non-Fiction', 2011-05-27, 2000000000, 1)
+	(999, 'mySQL dictionary', 'Structured Query Language Master', 'Non-Fiction', 2		001-04-11, 2000000000, 1);
+
+
+Someone has just checked out one of the books, change the number of copies to one fewer:
+
+	UPDATE librarybooks SET available_copies=19 WHERE ISBN=123;
+
+Now one of the books has been added to the banned books list. Remove it from the table:
+
+	DELETE FROM librarybooks WHERE ISBN=143;
+
+
+6. Write a command to make a new table to hold spacecrafts. Information should include id, name, year launched, country of origin, a brief description of the mission, orbiting body, if it is currently operating, and its approximate miles from earth. In addition to the table creation, provide the following operations (below):
+
+
+Table creation:
+
+
+	CREATE TABLE spaceships (
+
+		Id integer,
+
+		name text,
+
+		year smallint,
+
+		country text,
+
+		description text,
+
+		orbiting text,
+
+		in_operation bit, 
+
+		miles_earth decimal
+
+	);
+
+
+Add three non-Earth orbiting satellites to the table
+
+	INSERT INTO spaceships (Id, name, year, country, description, orbiting, in_operation, miles_earth) VALUES
+
+	(1, 'another one', 2019, 'Argentina', 'some ship', 'mars' TRUE, 1234.2),
+	(2, 'another second', 2015, 'Brazil', 'some other ship', 'Jupiter' TRUE, 1234523.2),
+
+	(3, 'another third one', 2017, 'Colombia', 'some third ship', 'Neptune' TRUE, 122344.2);
+
+
+Remove one of the satellites from the table since it has just crashed into the planet:
+
+	DELETE from spaceships WHERE Id=1;
+
+Edit another satellite because it is no longer operating and change the value to reflect that:
+
+	UPDATE spaceships SET in_operation=FALSE WHERE Id=3;
+
+
+
+7. Write a command to create a new table to hold the emails in your inbox. This table should include an id, the subject line, the sender, any additional recipients, the body of the email, the time stamp, whether or not you have read the email, and the id of the email chain it is in. Also provide the following (below):
+
+	CREATE TABLE email (
+
+		Id integer,
+
+		subject_line string,
+
+		sender text,
+
+		recipients string
+
+		time_sent timestamp,
+
+		read bit,
+
+		chain_id integer
+
+		
+	); 
+
+Add three new emails:
+
+--time stamp will automatically insert, hence not listed
+
+	INSERT INTO email (Id, subject_line, sender, recipients, read, chain_id) VALUES 
+
+	(1, "readme", "Katie", "Chris", "TRUE", 3),
+	(2, "readme", "Katie", "Chris", "TRUE", 4),
+	(4, "readme", "Katie", "Chris", "FALSE", 2);
+
+		
+Delete an email:
+
+	DELETE from email WHERE Id=1;
+
+Mark an email as unread:
+
+	UPDATE email SET read=FALSE WHERE Id=2;
+
+
+	
+
+
+
+
+
+
+ 
