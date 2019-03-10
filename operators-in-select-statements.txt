@@ -1,0 +1,190 @@
+1.
+
+Q: Write out a generic select statement
+
+
+A:	SELECT column1, column2
+	
+	FROM table1
+
+	WHERE X > 100;
+
+
+2. 
+
+Q: Create a fun way to remember the order of operations in a select statement.
+
+A: SFC: Select From Condition
+
+
+3. 
+
+Q: Given this dogs table, write queries to select the following pieces of data:
+
+
+Display the name, gender, and age of all dogs that are part Labrador:
+
+Select name, gender, age
+
+From dogs
+
+Where breed like '%labrador%';
+
+Display the ids of all dogs that are under 1 year old:
+
+select id 
+
+from dogs
+
+where age <1;
+
+
+Display the name and age of all dogs that are female and over 35lbs.
+
+select name, age
+
+from dogs
+
+where gender = 'F'
+
+and weight >35;
+
+Display all of the information about all dogs that are not Shepherd mixes.
+
+select *
+
+from dogs
+
+where breed Not like '%shepherd%';
+
+
+
+-Display the id, age, weight, and breed of all dogs that are either over 60lbs or Great Danes.
+
+select id, age, weight, breed
+
+from dogs
+
+where weight > 60
+
+or breed = 'great dane';
+
+
+4. 
+
+Q: Given this cats table, what records are returned from these queries?
+
+SELECT name, adoption_date FROM cats;
+
+
+SELECT name, adoption_date FROM cats;
+
+| name     | adoption_date            |
+| -------- | ------------------------ |
+| Mushi    | 2016-03-22T00:00:00.000Z |
+| Seashell |                          |
+| Azul     | 2016-04-17T00:00:00.000Z |
+| Victoire | 2016-09-01T00:00:00.000Z |
+| Nala     |                          |
+
+
+
+
+SELECT name, age FROM cats;
+
+
+
+| name     | age |
+| -------- | --- |
+| Mushi    | 1   |
+| Seashell | 7   |
+| Azul     | 3   |
+| Victoire | 7   |
+| Nala     | 1   |
+
+
+
+5.
+
+Q: From the cats table, write queries to select the following pieces of data:
+
+Display all the information about all of the available cats.
+
+Select * 
+
+From cats;
+
+
+
+
+Display the name and sex of all cats who are 7 years old.
+
+Select name, gender
+
+From cats
+
+Where age = 7;
+
+
+
+Find all of the names of the cats, so you don’t choose duplicate names for new cats.
+
+Select names
+
+From cats; 
+
+
+6. 
+
+Q: List each comparison operator and explain when you would use it. Include a real world example for each.
+
+A: 
+
+> - I would use this to filter my selection to an age that is greater than a number
+
+< - I would use this to filter my selection to a date that is before the date I list to filter a selection
+
+= - I would use this to select data equal to a value, for example if someones age equals 18
+
+>= - I would use this to filter a selection on a column for something greater than or equal to a value, like an age or date
+
+!= - I would use this to filter out values that are not equal to a value, for example to select individuals whose names are not Dan.
+
+<> - I would use this to filter out values that are not equal to a value, for example to select individuals whose names are not Dan.
+
+LIKE - I would use this to find a title of something if I can only remember part of the string. For example movies LIKE '%Star Wars%'.
+
+BETWEEN - I would use this to filter to a range of values, for example weight BETWEEN 110 and 150 lbs.
+
+IS TRUE/ IS FALSE - I would use this to filter data on a boolean value, for example if this was testing data for a candidate, where passed IS TRUE.
+
+IS NULL - I would use this to filter on blank values, for example felony charges IS NULL
+
+AND - I would use this to add another condition where two things have to be true, for example has graduated high school AND age is > 21.
+
+OR - I would use this to select records where one or another condition could be true, for example dog is brown or dog weight is > 30
+
+NOT - I would use this to exclude records from a filter, for example dog breed is not like chihuahua.
+
+
+7.
+
+Q: From the cats table, what data is returned from these queries?
+
+SELECT name FROM cats WHERE gender = ‘F’;
+
+Nala, Seashell
+
+
+SELECT name FROM cats WHERE age <> 3;
+
+
+Mushi, Seashell, Victoire, Nala
+
+
+
+SELECT ID FROM cats WHERE name != ‘Mushi’ AND gender = ‘M’;
+
+3,4
+
+
