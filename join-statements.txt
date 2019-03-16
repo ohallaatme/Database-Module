@@ -142,6 +142,7 @@ Where c.name = 'Rosco';
 		
 	
 9. Using this Library schema and data, write queries applying the following scenarios:
+
 To determine if the library should buy more copies of a given book, please provide
 the names and position, in order, of all of the patrons with a hold (request for
 a book with all copies checked out) on "Advanced Potion-Making".
@@ -152,40 +153,6 @@ a book with all copies checked out) on "Advanced Potion-Making".
     Left Join books ON books.isbn = holds.isbn
     Where books.title = 'Advanced Potion-Making'
     Order by holds.rank;
-
-Make a list of all book titles and denote whether or not a copy of that book is checked out.
-
-
-    Select 
-	transactions.id, 
-	books.title, 
-	transactions.checked_out_date
-    From books
-    Left Join transactions 
-    On transactions.isbn = books.isbn;
-
-In an effort to learn which books take longer to read, the librarians would like
-you to create a list of total checked out time by book name in the past month.
-
- 
-    Select books.title, SUM(transactions.checked_in_date - 	transactions.checked_out_date)
-    From books
-    Left Join transactions 
-    On transactions.isbn = books.isbn
-    Where transactions.checked_out_date > CURRENT_DATE - INTERVAL '30 DAYS'
-    Group By books.title;
-
-In order to learn which items should be retired, make a list of all books that have
-not been checked out in the past 5 years.
-
-
-    Select books.title
-    From books
-    Left Join transactions
-    On transactions.isbn = books.isbn
-    Group By books.title, books.isbn, transactions.checked_out_date
-    Having transactions.checked_out_date < CURRENT_DATE - INTERVAL '5 YEARS'
-    And books.isbn Not In (SELECT transactions.isbn FROM transactions WHERE transactions.checked_out_date > CURRENT_DATE - INTERVAL '5 YEARS');
 
 List all of the library patrons. If they have one or more books checked out, correspond
 the books to the patrons.
