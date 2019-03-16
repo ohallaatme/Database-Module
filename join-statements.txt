@@ -154,20 +154,17 @@ a book with all copies checked out) on "Advanced Potion-Making".
     Where books.title = 'Advanced Potion-Making'
     Order by holds.rank;
 
-List all of the library patrons. If they have one or more books checked out, correspond
-the books to the patrons.
+List all of the library patrons. If they have one or more books checked out, list the books with the patrons.
 
-
-    Select p.id, p.name, t.isbn, b.title, t.checked_out_date, t.checked_in_date
-    From patrons AS p
-    Right Join transactions AS t ON p.id = t.patron_id
-    Right Join books AS b ON b.isbn = t.isbn
-    Order By p.id;
-
-
-
-
-
+  Select p.id, t.isbn, p.name, 
+  CASE when t.checked_in_date is NULL THEN b.title ELSE ' ' END 
+  As Outstanding_Books
+    From patrons p
+    Right Join transactions t
+    ON p.id = t.patron_id
+    Right Join books b
+    ON b.isbn = t.isbn;
+  
 
 
 
