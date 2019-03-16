@@ -1,0 +1,57 @@
+
+1.
+
+Q: Using proper pseudo-code, describe the following primitive algorithms:
+
+  - making coffee
+  - washing dishes
+  - brushing teeth
+
+A: 
+
+Making coffee:
+
+GET Coffee Grounds
+GET Scooper
+GET Coffee filter
+SCOOP Grounds
+PLACE ground IN Coffee filter
+SET Machine ON
+END
+
+
+Washing dishes:
+
+PLACE dishes IN Dishwasher
+PLACE Soap in Dishwasher
+SET Dishwasher ON
+END
+
+Brushing Teeth:
+
+GET toothbrush
+GET toothpaste
+SET toothpaste on toothbrush
+ROTATE brush ON teeth
+END 
+
+2.
+
+Q: Name three companies who created an algorithm that made them successful (e.g. Google's search algorithm).
+
+A:
+
+1. Uber's platform algorithm of dynamic pricing that seeks equilibrium among a host of variables.
+
+2. Facebook's algorithm that prioritizes meaningful interactions from friends and family
+
+
+3. Instagrams algorithm to provide content that captures the users attention as an advertising platform
+
+Q: Hypothesize about what constitutes an efficient algorithm vs an inefficient one.
+
+A: I would think that an efficient algorithm:
+	- utilizes least amount of memory/resources needed
+	- is fast
+
+ Whereas an inefficient one takes up too much memory/resources and is much slower.
