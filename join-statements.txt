@@ -1,0 +1,214 @@
+1.
+
+Q: How do you find related data held in two separate tables?
+
+A: You find related data in two separate tables by looking for a key that they can match up on. Typically this is an ID or some kind of unique identifier for one of the tables. For example, if I have a table with employee information including social security numbers, and I have a table of employee salaries with their social security numbers, I can quickly see they both have the social security number in common as a primary key as every person only has one social security number (no duplicates like secondary keys). I can then join the tables using those two keys.
+
+2. 
+
+Q. Explain, in your own words, the difference between an INNER JOIN, LEFT OUTER JOIN, and RIGHT OUTER JOIN.
+
+A: 
+
+INNER JOIN - an inner join takes two tables with a common field and joins them - returning a table that only includes the rows with exact matches
+
+LEFT OUTER JOIN - A left outer join takes two tables that have a common field and joins them - returning a table that includes all of the fields from table one, a match of fields with the second table where the key matched, and inserted rows with null values for where the key did not match. 
+
+RIGHT OUTER JOIN - A right outer join takes two tables that have a common field and joins them - returning a table that includes all of the fields from table two, a match of fields with the first table where the key matched, and inserted rows with null values for where the key did not match. 
+
+3.
+
+Q: Define primary key and foreign key. Give a real world example for each:
+
+A:
+
+Primary Key - a unique identifier with NO duplicates, for example, each person has a social security number that is a unique identifier for themselves.
+
+Secondary Key - a field in a table that has duplicates, but connects to a unique identifier in another table (primary key).  For example, if I have a table with transactional data that contains customer Ids, however my customers love my store and purchase many things and thus their customer ID shows up more than once.
+
+
+4. 
+
+Q: Define aliasing
+
+A: aliasing is assigning a table you are bringing into your query as a shorter, easier term, very similar to a variable.
+
+
+5.
+
+Q:
+
+Select a.name,
+       b.salary,
+       b.vacation_days
+
+From professor a
+
+Join compensation b
+
+On a.id = b.professor_id;
+
+
+6.
+
+Q: Why would you use a natural join? Give a real world example
+
+A: I would use a natural join if I don't know all the fields that match so I would like SQL to easily join it up for me. For example, I have worked at jobs where I am still familiarizing myself with the data base so I have natural joined tables to understand how they connect.
+
+
+7.
+       
+Q: Using this Employee schema and data, write queries to find the following information:
+
+
+List all employees and all shifts:
+
+select a.name,
+	   b.id,
+       b.date,
+       b.start_time,
+       b.end_time
+from employees a
+join shifts b
+On a.id = b.id;
+
+
+8. 
+
+Q: Using this Adoption Schema and data, please write queries to retrieve the following information and include the results:
+
+Create a list of all volunteers. If the volunteer is fostering a dog, include each dog as well:
+
+Select concat(a.first_name, ' ', a.last_name) as volunteer,
+b.name
+
+From volunteers a
+left join dogs b
+on a.foster_dog_id = b.id;
+
+The cat's name, adopter's name, and adopted date for each cat adopted within the past month to be displayed as part of the "Happy Tail" social media promotion which posts recent successful adoptions:
+
+
+Select a.name, 
+	   concat(b.first_name, ' ', b.last_name) as adopter_name,
+       c.date
+       
+From cats a
+Join cat_adoptions c
+on c.cat_id = a.id
+Join adopters b
+on c.adopter_id = b.id
+Where c.date > current_date - interval '30 days'
+
+Create a list of adopters who have not yet chosen a dog to adopt:
+
+Select a.id, concat(a.first_name, ' ', a.last_name) as adopter_name
+
+from adopters a
+Where a.id Not in (select b.adopter_id from dog_adoptions b);
+
+
+Lists of all cats and all dogs who have not been adopted:
+
+Select a.id, 
+	a.name,
+	b.adopter_id
+
+From cats a 
+Left join cat_adoptions b
+On a.id = b.cat_id
+Where b.adopter_id is null;
+
+Select a.id,
+	a.name,
+	b.adopter_id
+From dogs a
+Left join dog_adoptions b
+On a.id = b.dog_id
+Where b.adopter_id is Null
+
+The name of the person who adopted Rosco:
+
+Select a.adopter_id,
+	concat(b.first_name, ' ', b.last_name) as adopter_name,
+	c.name
+
+From dog_adoptions a
+Join adopters b
+On b.id = a.adopter_id
+Join dogs c
+On c.id = a.dog_id
+Where c.name = 'Rosco';
+		
+	
+9. Using this Library schema and data, write queries applying the following scenarios:
+To determine if the library should buy more copies of a given book, please provide
+the names and position, in order, of all of the patrons with a hold (request for
+a book with all copies checked out) on "Advanced Potion-Making".
+
+    Select patrons.name, holds.rank, books.title
+    From holds
+    Left Join patrons ON patrons.id = holds.patron_id
+    Left Join books ON books.isbn = holds.isbn
+    Where books.title = 'Advanced Potion-Making'
+    Order by holds.rank;
+
+Make a list of all book titles and denote whether or not a copy of that book is checked out.
+
+
+    Select 
+	transactions.id, 
+	books.title, 
+	transactions.checked_out_date
+    From books
+    Left Join transactions 
+    On transactions.isbn = books.isbn;
+
+In an effort to learn which books take longer to read, the librarians would like
+you to create a list of total checked out time by book name in the past month.
+
+ 
+    Select books.title, SUM(transactions.checked_in_date - 	transactions.checked_out_date)
+    From books
+    Left Join transactions 
+    On transactions.isbn = books.isbn
+    Where transactions.checked_out_date > CURRENT_DATE - INTERVAL '30 DAYS'
+    Group By books.title;
+
+In order to learn which items should be retired, make a list of all books that have
+not been checked out in the past 5 years.
+
+
+    Select books.title
+    From books
+    Left Join transactions
+    On transactions.isbn = books.isbn
+    Group By books.title, books.isbn, transactions.checked_out_date
+    Having transactions.checked_out_date < CURRENT_DATE - INTERVAL '5 YEARS'
+    And books.isbn Not In (SELECT transactions.isbn FROM transactions WHERE transactions.checked_out_date > CURRENT_DATE - INTERVAL '5 YEARS');
+
+List all of the library patrons. If they have one or more books checked out, correspond
+the books to the patrons.
+
+
+    Select p.id, p.name, t.isbn, b.title, t.checked_out_date, t.checked_in_date
+    From patrons AS p
+    Right Join transactions AS t ON p.id = t.patron_id
+    Right Join books AS b ON b.isbn = t.isbn
+    Order By p.id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
