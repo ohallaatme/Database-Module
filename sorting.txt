@@ -22,31 +22,21 @@ end procedure
 Q:Write pseudocode for quicksort.
 
 A:
-function partitionFunc(left, right, pivot)
-   leftPointer = left
-   rightPointer = right - 1
 
-   while True do
-      while A[++leftPointer] < pivot do
-         //do-nothing            
-      end while
-		
-      while rightPointer > 0 && A[--rightPointer] > pivot do
-         //do-nothing         
-      end while
-		
-      if leftPointer >= rightPointer
-         break
-      else                
-         swap leftPointer,rightPointer
-      end if
-		
-   end while 
-	
-   swap leftPointer,right
-   return leftPointer
-	
-end function
+Function Quicksort( double[], a)
+	{
+IF (a.length <= 1)
+		return;
+	SELECT PIVOT last ELEMENT in a
+	Partition a[] in TWO Halves
+	  left[]: elements <= pivot
+	  right[]: elements > pivot;
+	sort left[]
+	sort right[]
+        CONCATENATE left[] pivot right[]
+
+}
+
 
 3.
 
